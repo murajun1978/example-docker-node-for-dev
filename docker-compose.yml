@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  node_dev: &node_dev
+    build:
+      context: .
+      dockerfile: ./docker/development/Dockerfile
+    volumes:
+      - ./:/home/app
+    depends_on:
+      - db
+
+  server:
+    <<: *node_dev
+    ports:
+      - 3000:3000
+    command: npm start
+
+  runner:
+    <<: *node_dev
+    command: /bin/sh
+
+  db:
+    image: postgres:11.5-alpine
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgresql-data:/var/lib/postgresql
+
+volumes:
+  postgresql-data:
