@@ -1,4 +1,4 @@
-# Example Docker on Node.js for Dev
+# Example Node.js with Docker for Dev
 > Node.js + Postgresql
 
 ## Get started
